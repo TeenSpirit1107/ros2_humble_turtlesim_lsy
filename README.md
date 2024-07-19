@@ -48,44 +48,62 @@ ROS2对于Ubuntu系统来说属于第三方软件，需要先添加源、再添�
 一键安装ROS2（鱼香ROS开发的一键安装脚本，可通过该脚本安装其他常用软件）
 2.1. ctrl+alt+t打开终端
 2.2. 输入命令
-> wget http://fishros.com/install -O fishros && . fishros
+```
+wget http://fishros.com/install -O fishros && . fishros
+```
 选择ROS2 Humble桌面版完成安装过程
 安装完成后在终端输入ros2检查是否安装成功
 3. 配置ROS2环境
 [官方配置文档](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html)
 3.1 将ros2加入系统默认的环境中
 输入以下命令，将ros2加入bashrc中，这样每次启动终端时都可以自动加载ros2
-> echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
+echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+```
 
 至此，ROS2 Humble已经成功在Ubuntu上安装完毕。可以在终端通过ros2命令来运行ROS2
 
 ## 代码运行说明
 1. 创建一个新的ROS2工作空间
 ctrl+alt+t打开终端，输入以下命令
-> mkdir -p ~/ros2_ws/src
-> cd ~/ros2_ws/src
+```
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+```
 
-2. 安装代码功能包
+3. 安装代码功能包
 在同一目录下输入以下命令：
-> git clone https://github.com/RhysRusty/ros2_turtle_game/tree/master
+```
+git clone https://github.com/RhysRusty/ros2_turtle_game/tree/master
+```
 
 3. 安装依赖
 输入以下命令
-> sudo rosdep init
-> rosdep update
-> rosdep install -i --from-path src --rosdistro humble -y
+```
+sudo rosdep init
+rosdep update
+rosdep install -i --from-path src --rosdistro humble -y
+```
 
 4. 编译工作空间
-> cd ~/ros2_ws
-> colcon build
+```
+cd ~/ros2_ws
+colcon build
+```
 
 5. 设置环境
 同一目录下输入
-> source install/setup.bash
+```
+source install/setup.bash
+```
 
 6. 运行ROS2 turtlesim节点
-> ros2 run turtlesim turtlesim_node
+```
+ros2 run turtlesim turtlesim_node
+```
 
 7. 运行题目代码
 开启一个新的终端，输入以下命令
-> ros2 run turtle_motion go_to_goal
+```
+ros2 run turtle_motion go_to_goal
+```
