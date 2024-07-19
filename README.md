@@ -7,6 +7,7 @@ Ubuntu是基于Linux内核的桌面PC操作系统，也称为Linux的发行版�
 2. 双系统
 3. Windows Subsystem for Linux (WSL)（Windows子系统）
 这里采用第一种方法。
+
 1. 下载VMware虚拟机软件
 VMware在今年五月份被Broadcom收购后，向个人用户免费开放了VMware Workstation Pro，可前往Broadcom官网注册账号进行下载，这里使用VMware Workstation Pro 16.2.4。
 [Broadcom官网下载地址](https://support.broadcom.com/group/ecx/downloads)
@@ -21,6 +22,7 @@ Ubuntu在偶数年的四月份会发布长期支持版本（LTS），保证在�
 推荐在设置中移除打印机，分配较多的硬盘大小
 （至少为2G），开启虚拟化引擎，提高虚拟机性能。
 配置好之后可以成功启动模拟机。
+
 * 可能遇到的问题：
 1. 启动虚拟机失败，提示主机Intel VT-x处于禁用状态。
 > VT-x是intel运用Virtualization虚拟化技术中的一个指令集，是CPU的硬件虚拟化技术，VT可以同时提升虚拟化效率和虚拟机的安全性。
@@ -36,7 +38,9 @@ Ubuntu在偶数年的四月份会发布长期支持版本（LTS），保证在�
 Ubuntu安装后的官方源默认是美国的服务器，在国内安装软件会受到比较大的限制，下载软件很慢，需要切换成国内源。一般使用的国内源有阿里源，网易源和高校源，这里使用阿里源
 方法：
 打开系统设置，在软件和更新中更改下载服务器，选择国内源
+
 2. 在Ubuntu中安装软件
+
 在Ubuntu中安装软件主要有以下几种方式：
 1. 使用Ubuntu软件商店
 2. 使用apt命令从服务器下载
