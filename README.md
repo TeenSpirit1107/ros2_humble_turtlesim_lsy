@@ -50,7 +50,9 @@ Ubuntu安装后的官方源默认是美国的服务器，在国内安装软件�
 ROS2对于Ubuntu系统来说属于第三方软件，需要先添加源、再添加秘钥才才使用apt进行安装，过程较为麻烦，这里我们使用简易方法
 也可以跟随官方教程进行安装[https://docs.ros.org/en/humble/Installation.html](https://docs.ros.org/en/humble/Installation.html)
 一键安装ROS2（鱼香ROS开发的一键安装脚本，可通过该脚本安装其他常用软件）
+
 2.1. ctrl+alt+t打开终端
+
 2.2. 输入命令
 ```
 wget http://fishros.com/install -O fishros && . fishros
