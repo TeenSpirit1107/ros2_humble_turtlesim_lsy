@@ -8,16 +8,16 @@ Ubuntu是基于Linux内核的桌面PC操作系统，也称为Linux的发行版�
 3. Windows Subsystem for Linux (WSL)（Windows子系统）
 这里采用第一种方法。
 
-1. 下载VMware虚拟机软件
+#### 下载VMware虚拟机软件
 VMware在今年五月份被Broadcom收购后，向个人用户免费开放了VMware Workstation Pro，可前往Broadcom官网注册账号进行下载，这里使用VMware Workstation Pro 16.2.4。
 [Broadcom官网下载地址](https://support.broadcom.com/group/ecx/downloads)
-2. 选择Ubuntu版本
+#### 选择Ubuntu版本
 Ubuntu在偶数年的四月份会发布长期支持版本（LTS），保证在五年内持续维护更新，这里需要选择与ROS2 Humble对应的LTS版本22.04 LTS。
 **每一个版本的ROS2都为一个特定版本的Ubuntu版本构建，且具有许多依赖关系，在安装之前需要选择与ROS2对应的Ubuntu版本。**
 * 在安装时需留意对应的cpu架构，官网下载默认为amd64
-3. 下载Ubuntu的系统镜像
+#### 下载Ubuntu的系统镜像
 [官网下载链接](https://ubuntu.com/download/desktop)
-4. 安装Ubuntu22
+#### 安装Ubuntu22
 在VMware Workstation Pro中选择新建虚拟机，设置路径，配置虚拟机硬盘大小
 推荐在设置中移除打印机，分配较多的硬盘大小
 （至少为2G），开启虚拟化引擎，提高虚拟机性能。
