@@ -51,8 +51,9 @@ ROS2对于Ubuntu系统来说属于第三方软件，需要先添加源、再添�
 ```
 wget http://fishros.com/install -O fishros && . fishros
 ```
-选择ROS2 Humble桌面版完成安装过程
-安装完成后在终端输入ros2检查是否安装成功
+选择ROS2，Humble桌面版完成安装过程。
+安装完成后在终端输入ros2检查是否安装成功。
+
 3. 配置ROS2环境
 [官方配置文档](https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html)
 3.1 将ros2加入系统默认的环境中
