@@ -25,22 +25,11 @@ class GoToGoal(Node):
         # 创建乌龟位置的订阅者对象（消息类型， 话题名，回调函数，队列长度）
         self.pose_subscriber = self.create_subscription(Pose, '/turtle1/pose', self.pose_callback, 10)
         # 初始化目标位置
-
-        # # 调用/spawn服务，创建新乌龟
-        # self.cli1 = self.create_client(Spawn, '/spawn')
-        # while not self.cli1.wait_for_service(timeout_sec=1.0):
-        #     self.get_logger().info('service_sqawn not available, waiting again...')
-        # self.req = Spawn.Request()
-
-        # self.cli2 = self.create_client(Kill, '/kill')
-        # while not self.cli2.wait_for_service(timeout_sec=1.0):
-        #     self.get_logger().info('service_kill not available, waiting again...')
-        # self.req2 = Kill.Request()
-        # 调用/spawn服务，创建新乌龟
         self.cli2 = self.create_client(Kill, '/kill')
         while not self.cli2.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service_kill not available, waiting again...')
         self.req2 = Kill.Request()
+        self.kill(2)
 
         self.cli1 = self.create_client(Spawn, '/spawn')
         while not self.cli1.wait_for_service(timeout_sec=1.0):
@@ -48,7 +37,7 @@ class GoToGoal(Node):
         self.req = Spawn.Request()
 
         
-        self.count =2
+        self.count =3
         self.set_goal()
 
     def spawn(self):
