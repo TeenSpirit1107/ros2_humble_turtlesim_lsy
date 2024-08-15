@@ -104,13 +104,7 @@ colcon build
 source install/setup.bash
 ```
 
-6. 运行ROS2 turtlesim节点
+6. 运行launch文件
 ```
-ros2 run turtlesim turtlesim_node
-```
-
-7. 运行题目代码
-开启一个新的终端，输入以下命令
-```
-ros2 run turtle_motion go_to_goal
+ros2 launch turtle_motion turtle_motion_launch.py
 ```
