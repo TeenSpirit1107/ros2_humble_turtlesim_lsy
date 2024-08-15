@@ -23,8 +23,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "go_to_goal = turtle_motion.go_to_goal:main",
-            "turtle_spawner = turtle_motion.turtle_spawner:main"
+            "go_to_goal = turtle_motion.go_to_goal:main"
         ],
     },
 )
