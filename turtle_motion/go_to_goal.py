@@ -4,11 +4,15 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
-from math import sqrt, pi, atan2
+from math import sqrt, pi, atan2,sin, cos
 from turtlesim.srv import Spawn, Kill
 import random
 
 class GoToGoal(Node):
+    SPEED_FAST = 4.0
+    SPEED_SLOW = 1.6
+    DISTANCE_REACHED = 0.1
+    DISTANCE_CLOSE = 1.0
     pose_x = 0.0
     pose_y = 0.0
     theta = 0.0
@@ -22,23 +26,34 @@ class GoToGoal(Node):
         self.pose_subscriber = self.create_subscription(Pose, '/turtle1/pose', self.pose_callback, 10)
         # 初始化目标位置
 
-        # 调用/spawn服务，创建新乌龟
-        self.cli1 = self.create_client(Spawn, '/spawn')
-        while not self.cli1.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('service_sqawn not available, waiting again...')
-        self.req = Spawn.Request()
+        # # 调用/spawn服务，创建新乌龟
+        # self.cli1 = self.create_client(Spawn, '/spawn')
+        # while not self.cli1.wait_for_service(timeout_sec=1.0):
+        #     self.get_logger().info('service_sqawn not available, waiting again...')
+        # self.req = Spawn.Request()
 
+        # self.cli2 = self.create_client(Kill, '/kill')
+        # while not self.cli2.wait_for_service(timeout_sec=1.0):
+        #     self.get_logger().info('service_kill not available, waiting again...')
+        # self.req2 = Kill.Request()
+        # 调用/spawn服务，创建新乌龟
         self.cli2 = self.create_client(Kill, '/kill')
         while not self.cli2.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service_kill not available, waiting again...')
         self.req2 = Kill.Request()
 
+        self.cli1 = self.create_client(Spawn, '/spawn')
+        while not self.cli1.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('service_sqawn not available, waiting again...')
+        self.req = Spawn.Request()
+
+        
         self.count =2
         self.set_goal()
 
     def spawn(self):
-        self.req.x = random.uniform(0.0, 11.0)
-        self.req.y = random.uniform(0.0, 11.0)
+        self.req.x = random.uniform(0.3, 10.7) # if you set it to (0.0,11.0), sometimes the turtle may be spawned at somewhere out of bound and will not be displayed in the window.
+        self.req.y = random.uniform(0.3, 10.7)
         self.req.theta = 0.0
         self.req.name = f'turtle{self.count}'
         self.future = self.cli1.call_async(self.req)
@@ -63,33 +78,23 @@ class GoToGoal(Node):
 
     def go_to_goal(self):
         # 计算距离
+        speed = Twist()
         self.dist_x = self.x_goal - self.pose_x
         self.dist_y = self.y_goal - self.pose_y
+        angle = atan2(self.dist_y, self.dist_x)
         distance = sqrt(self.dist_x**2 + self.dist_y**2)
-        speed = Twist()
         # 配置速度
-        if distance > 0.1:
-            speed.linear.x = 2.0
-            if distance < 2.0:
-                speed.linear.x = 1.0
-
-            angle = atan2(self.dist_y, self.dist_x)
-            diff = angle - self.theta
-
-            if diff > pi:
-                diff -= 2*pi
-            elif diff < -pi:
-                diff += 2*pi
-
-            speed.angular.z = 6*(diff)
-        else:
+        if distance > self.DISTANCE_REACHED:
+            speed_magn = self.SPEED_FAST if distance >self.DISTANCE_CLOSE else 1.0
+            speed.linear.x = speed_magn*cos(angle)
+            speed.linear.y = speed_magn*sin(angle)
             speed.angular.z = 0.0
-            speed.linear.x = 0.0
+        else:
+            speed.linear.x,speed.linear.y,speed.angular.z=0.0,0.0,0.0
             self.get_logger().info("reached the goal")
             self.kill(self.count)
             self.count += 1
             self.set_goal()
-
         self.velocity_publisher.publish(speed)
 
 def main(args=None):
